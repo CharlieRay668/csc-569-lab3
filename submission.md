@@ -1,3 +1,3 @@
 ## Charlie Ray
 
-I did the entire lab, as I didn't find a group.
+I did the lab individually. All work is mine.

@@ -1,0 +1,34 @@
+Instructions to run the code:
+
+Included with the assignment are two test harnesses that I made for myself:
+
+harness.go:
+
+Just spins up the server and 8 nodes, and then prints out the results (if a node is running for leader, if elected, etc.)
+
+visharness.go:
+
+Also spins up the server and 8 nodes but parses the output of each node to give a visualization.
+Blue means follower
+Yellow means candidate
+Teal means leader
+Red X means killed
+
+visharness will also kill the current leader every 15 seconds, so you can see the election process start again.
+
+alternatievly, you can just run
+
+go run server.go
+
+and then for i = 1...8
+
+go run client.go i
+
+and they should all connect the same.
+
+tuning the 
+	MinElectonWait   = 2 * time.Second
+	MaxElectonWait   = 4 * time.Second
+	HearbeatInterval = 500 * time.Millisecond
+times in shared.go might also be nice. Just make sure heartbeats happen quick enough to
+avoid nodes thinking the leader is dead.

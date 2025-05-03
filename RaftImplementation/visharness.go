@@ -24,13 +24,12 @@ var (
 	}
 	// Glyphs
 	glyph = map[string]string{
-		"Follower":  "░",
-		"Candidate": "▒",
-		"Leader":    "█",
+		"Follower":  "F",
+		"Candidate": "C",
+		"Leader":    "L",
 		"Dead":      "X",
 	}
 
-	// now includes Follower, Candidate, and Leader
 	reState = regexp.MustCompile(
 		`Node (\d+) Follower .*term (\d+)|` +
 			`Node (\d+) Candidate .*term (\d+)|` +
@@ -39,7 +38,7 @@ var (
 
 	mu       sync.Mutex
 	term     = [9]int{}            // 1–8
-	role     = [9]string{}         // "Follower","Candidate","Leader"
+	role     = [9]string{}         // "Follower","Candidate","Leader,Daead"
 	procs    = map[int]*exec.Cmd{} // 1–8
 	killedID int
 )
