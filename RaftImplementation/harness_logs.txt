@@ -247,3 +247,228 @@
 [C7] Node 7: voted for 1 (term 1)
 [C1] Node 1: counting votes (term 1)
 [C1] Node 1 → Leader (term 1)
+[SERVER] 2025/05/02 17:06:34 RPC broker on :9005 …
+[C1] Node 1 → Follower (term 0)
+[C2] Node 2 → Follower (term 0)
+[C3] Node 3 → Follower (term 0)
+[C4] Node 4 → Follower (term 0)
+[C5] Node 5 → Follower (term 0)
+[C6] Node 6 → Follower (term 0)
+[C7] Node 7 → Follower (term 0)
+[C8] Node 8 → Follower (term 0)
+[C2] Node 2 Candidate (term 1)
+[C1] Node 1 Follower (term 1)
+[C1] Node 1: voted for 2 (term 1)
+[C4] Node 4 Candidate (term 1)
+[C5] Node 5 Follower (term 1)
+[C5] Node 5: voted for 2 (term 1)
+[C6] Node 6 Follower (term 1)
+[C6] Node 6: voted for 2 (term 1)
+[C3] Node 3 Follower (term 1)
+[C3] Node 3: voted for 2 (term 1)
+[C7] Node 7 Follower (term 1)
+[C7] Node 7: voted for 2 (term 1)
+[C8] Node 8 Follower (term 1)
+[C8] Node 8: voted for 2 (term 1)
+[C2] Node 2: counting votes (term 1)
+[C2] Node 2 Leader (term 1)
+[C4] Node 4: counting votes (term 1)
+[C4] Node 4 Follower (term 1)
+[SERVER] 2025/05/02 17:23:08 RPC broker on :9005 …
+[C1] Node 1 → Follower (term 0)
+[C2] Node 2 → Follower (term 0)
+[C3] Node 3 → Follower (term 0)
+[C4] Node 4 → Follower (term 0)
+[C5] Node 5 → Follower (term 0)
+[C6] Node 6 → Follower (term 0)
+[C7] Node 7 → Follower (term 0)
+[C8] Node 8 → Follower (term 0)
+[C2] Node 2 Candidate (term 1)
+[C3] Node 3 Follower (term 1)
+[C3] Node 3: voted for 2 (term 1)
+[C4] Node 4 Follower (term 1)
+[C4] Node 4: voted for 2 (term 1)
+[C7] Node 7 Follower (term 1)
+[C7] Node 7: voted for 2 (term 1)
+[C5] Node 5 Follower (term 1)
+[C5] Node 5: voted for 2 (term 1)
+[C6] Node 6 Follower (term 1)
+[C6] Node 6: voted for 2 (term 1)
+[C8] Node 8 Follower (term 1)
+[C8] Node 8: voted for 2 (term 1)
+[C1] Node 1 Follower (term 1)
+[C1] Node 1: voted for 2 (term 1)
+[C2] Node 2: counting votes (term 1)
+[C2] Node 2 Leader (term 1)
+[C4] Node 4 Candidate (term 2)
+[C5] Node 5 Follower (term 2)
+[C5] Node 5: voted for 4 (term 2)
+[C6] Node 6 Follower (term 2)
+[C6] Node 6: voted for 4 (term 2)
+[C3] Node 3 Candidate (term 2)
+[C8] Node 8 Follower (term 2)
+[C8] Node 8: voted for 4 (term 2)
+[C1] Node 1 Follower (term 2)
+[C1] Node 1: voted for 4 (term 2)
+[C2] Node 2 Follower (term 2)
+[C2] Node 2: voted for 4 (term 2)
+[C7] Node 7 Follower (term 2)
+[C7] Node 7: voted for 4 (term 2)
+[C4] Node 4: counting votes (term 2)
+[C4] Node 4 Leader (term 2)
+[C3] Node 3: counting votes (term 2)
+[C3] Node 3 Follower (term 2)
+[C3] Node 3 Candidate (term 3)
+[C2] Node 2 Follower (term 3)
+[C2] Node 2: voted for 3 (term 3)
+[C7] Node 7 Follower (term 3)
+[C7] Node 7: voted for 3 (term 3)
+[C5] Node 5 Follower (term 3)
+[C5] Node 5: voted for 3 (term 3)
+[C6] Node 6 Follower (term 3)
+[C6] Node 6: voted for 3 (term 3)
+[C8] Node 8 Follower (term 3)
+[C8] Node 8: voted for 3 (term 3)
+[C1] Node 1 Follower (term 3)
+[C1] Node 1: voted for 3 (term 3)
+[C4] Node 4 Follower (term 3)
+[C4] Node 4: voted for 3 (term 3)
+[C3] Node 3: counting votes (term 3)
+[C3] Node 3 Leader (term 3)
+[SERVER] 2025/05/02 17:24:08 RPC broker on :9005 …
+[C1] Node 1 → Follower (term 0)
+[C2] Node 2 → Follower (term 0)
+[C3] Node 3 → Follower (term 0)
+[C4] Node 4 → Follower (term 0)
+[C5] Node 5 → Follower (term 0)
+[C6] Node 6 → Follower (term 0)
+[C7] Node 7 → Follower (term 0)
+[C8] Node 8 → Follower (term 0)
+[C2] Node 2: election timeout (term 0) time since last HB: 3.132594417s
+[C1] Node 1: election timeout (term 0) time since last HB: 3.209993083s
+[C3] Node 3: election timeout (term 0) time since last HB: 3.713750583s
+[C5] Node 5: election timeout (term 0) time since last HB: 3.771252917s
+[C7] Node 7: election timeout (term 0) time since last HB: 3.852293292s
+[C4] Node 4: election timeout (term 0) time since last HB: 4.52506275s
+[C8] Node 8: election timeout (term 0) time since last HB: 4.045510125s
+[C6] Node 6: election timeout (term 0) time since last HB: 4.601454708s
+[C2] Node 2: election timeout (term 0) time since last HB: 6.279669125s
+[C2] Node 2 Candidate (term 1)
+[C8] Node 8 Follower (term 1)
+[C8] Node 8: voted for 2 (term 1)
+[C3] Node 3 Follower (term 1)
+[C3] Node 3: voted for 2 (term 1)
+[C5] Node 5 Follower (term 1)
+[C5] Node 5: voted for 2 (term 1)
+[C1] Node 1 Follower (term 1)
+[C1] Node 1: voted for 2 (term 1)
+[C6] Node 6 Follower (term 1)
+[C6] Node 6: voted for 2 (term 1)
+[C4] Node 4 Follower (term 1)
+[C4] Node 4: voted for 2 (term 1)
+[C7] Node 7 Follower (term 1)
+[C7] Node 7: voted for 2 (term 1)
+[C5] Node 5: election timeout (term 1) time since last HB: 1.366728041s
+[C1] Node 1: election timeout (term 1) time since last HB: 1.36672825s
+[C3] Node 3: election timeout (term 1) time since last HB: 2.234533792s
+[C7] Node 7: election timeout (term 1) time since last HB: 2.289651667s
+[C2] Node 2: counting votes (term 1)
+[C2] Node 2 Leader (term 1)
+[C4] Node 4: election timeout (term 1) time since last HB: 2.667693708s
+[C6] Node 6: election timeout (term 1) time since last HB: 3.132445292s
+[C2] Node 2: election timeout (term 1) time since last HB: 9.873628375s
+[C8] Node 8: election timeout (term 1) time since last HB: 3.918812959s
+[C5] Node 5: election timeout (term 1) time since last HB: 4.574432708s
+[C1] Node 1: election timeout (term 1) time since last HB: 4.932235666s
+[C7] Node 7: election timeout (term 1) time since last HB: 5.310128875s
+[C3] Node 3: election timeout (term 1) time since last HB: 6.650261584s
+[C3] Node 3 Candidate (term 2)
+[C2] Node 2 Follower (term 2)
+[C2] Node 2: voted for 3 (term 2)
+[C6] Node 6 Follower (term 2)
+[C6] Node 6: voted for 3 (term 2)
+[C4] Node 4 Follower (term 2)
+[C4] Node 4: voted for 3 (term 2)
+[C7] Node 7 Follower (term 2)
+[C7] Node 7: voted for 3 (term 2)
+[C8] Node 8 Follower (term 2)
+[C8] Node 8: voted for 3 (term 2)
+[C5] Node 5 Follower (term 2)
+[C5] Node 5: voted for 3 (term 2)
+[C1] Node 1 Follower (term 2)
+[C1] Node 1: voted for 3 (term 2)
+[C4] Node 4: election timeout (term 2) time since last HB: 899.038334ms
+[C6] Node 6: election timeout (term 2) time since last HB: 1.430966375s
+[C2] Node 2: election timeout (term 2) time since last HB: 1.709098083s
+[C8] Node 8: election timeout (term 2) time since last HB: 1.645730417s
+[C5] Node 5: election timeout (term 2) time since last HB: 2.109543875s
+[C1] Node 1: election timeout (term 2) time since last HB: 2.243967042s
+[C3] Node 3: counting votes (term 2)
+[C3] Node 3 Leader (term 2)
+[SERVER] 2025/05/02 17:24:47 RPC broker on :9005 …
+[C1] Node 1 → Follower (term 0)
+[C2] Node 2 → Follower (term 0)
+[C3] Node 3 → Follower (term 0)
+[C4] Node 4 → Follower (term 0)
+[C5] Node 5 → Follower (term 0)
+[C6] Node 6 → Follower (term 0)
+[C7] Node 7 → Follower (term 0)
+[C8] Node 8 → Follower (term 0)
+[C1] Node 1: election timeout (term 0) time since last HB: 3.490636167s
+[C3] Node 3: election timeout (term 0) time since last HB: 3.636952167s
+[C6] Node 6: election timeout (term 0) time since last HB: 3.472980916s
+[C4] Node 4: election timeout (term 0) time since last HB: 4.261318291s
+[C5] Node 5: election timeout (term 0) time since last HB: 4.152902791s
+[C2] Node 2: election timeout (term 0) time since last HB: 4.905647875s
+[C8] Node 8: election timeout (term 0) time since last HB: 4.550360084s
+[C7] Node 7: election timeout (term 0) time since last HB: 4.80571625s
+[C1] Node 1: election timeout (term 0) time since last HB: 7.087956s
+[C1] Node 1 Candidate (term 1)
+[C3] Node 3 Follower (term 1)
+[C3] Node 3: voted for 1 (term 1)
+[C6] Node 6 Follower (term 1)
+[C6] Node 6: voted for 1 (term 1)
+[C6] Node 6: election timeout (term 1) time since last HB: 122.842125ms
+[C7] Node 7 Follower (term 1)
+[C7] Node 7: voted for 1 (term 1)
+[C8] Node 8 Follower (term 1)
+[C8] Node 8: voted for 1 (term 1)
+[C4] Node 4 Follower (term 1)
+[C4] Node 4: voted for 1 (term 1)
+[C5] Node 5 Follower (term 1)
+[C5] Node 5: voted for 1 (term 1)
+[C2] Node 2 Follower (term 1)
+[C2] Node 2: voted for 1 (term 1)
+[C3] Node 3: election timeout (term 1) time since last HB: 456.144583ms
+[C5] Node 5: election timeout (term 1) time since last HB: 185.220125ms
+[C8] Node 8: election timeout (term 1) time since last HB: 1.677577334s
+[C4] Node 4: election timeout (term 1) time since last HB: 2.153989125s
+[C7] Node 7: election timeout (term 1) time since last HB: 2.188018375s
+[C2] Node 2: election timeout (term 1) time since last HB: 2.086578875s
+[C1] Node 1: counting votes (term 1)
+[C1] Node 1 Leader (term 1)
+[C1] Node 1: election timeout (term 1) time since last HB: 11.12483825s
+[C3] Node 3: election timeout (term 1) time since last HB: 265.307292ms
+[C5] Node 5: election timeout (term 1) time since last HB: 115.364833ms
+[C6] Node 6: election timeout (term 1) time since last HB: 52.6705ms
+[C8] Node 8: election timeout (term 1) time since last HB: 247.058416ms
+[C2] Node 2: election timeout (term 1) time since last HB: 191.002333ms
+[C4] Node 4: election timeout (term 1) time since last HB: 441.3765ms
+[C7] Node 7: election timeout (term 1) time since last HB: 277.702709ms
+[C1] Node 1: election timeout (term 1) time since last HB: 14.666091208s
+[C6] Node 6: election timeout (term 1) time since last HB: 223.14125ms
+[C3] Node 3: election timeout (term 1) time since last HB: 345.787833ms
+[C5] Node 5: election timeout (term 1) time since last HB: 224.189208ms
+[C8] Node 8: election timeout (term 1) time since last HB: 98.006333ms
+[C4] Node 4: election timeout (term 1) time since last HB: 378.336083ms
+[C2] Node 2: election timeout (term 1) time since last HB: 195.194ms
+[C3] Node 3: election timeout (term 1) time since last HB: 64.210917ms
+[C7] Node 7: election timeout (term 1) time since last HB: 428.213541ms
+[C1] Node 1: election timeout (term 1) time since last HB: 19.083859167s
+[C4] Node 4: election timeout (term 1) time since last HB: 422.624459ms
+[C6] Node 6: election timeout (term 1) time since last HB: 55.3185ms
+[C5] Node 5: election timeout (term 1) time since last HB: 321.39275ms
+[C8] Node 8: election timeout (term 1) time since last HB: 209.76225ms
+[C2] Node 2: election timeout (term 1) time since last HB: 143.406083ms
+[C1] Node 1: election timeout (term 1) time since last HB: 22.150854875s
+[C7] Node 7: election timeout (term 1) time since last HB: 38.528792ms

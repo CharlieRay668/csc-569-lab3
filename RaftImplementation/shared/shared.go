@@ -18,12 +18,10 @@ const (
 	// MinElectonWait   = 150 * time.Millisecond
 	// MaxElectonWait   = 300 * time.Millisecond
 	// HearbeatInterval = 50 * time.Millisecond
-	MinElectonWait   = 3 * time.Second
-	MaxElectonWait   = 5 * time.Second
-	HearbeatInterval = 1 * time.Second
+	MinElectonWait   = 2 * time.Second
+	MaxElectonWait   = 4 * time.Second
+	HearbeatInterval = 500 * time.Millisecond
 )
-
-/* ---------------- basic node / membership (unchanged) -------------- */
 
 type Node struct {
 	ID        int
@@ -65,8 +63,6 @@ func (m *Membership) Update(payload Node, reply *Node) error {
 	return nil
 }
 
-/* ---------------- fan‑out service ---------------- */
-
 type VoteRequest struct {
 	Term        int
 	CandidateID int
@@ -83,10 +79,8 @@ type Heartbeat struct {
 	Table    *Membership
 }
 
-// Message.Type: 0 → VoteRequest, 1 → VoteResponse, 2 → Heartbeat
-
 type Message struct {
-	Type int
+	Type int // 0: vote request, 1: vote response, 2: heartbeat
 	Msg  any
 }
 
@@ -95,7 +89,7 @@ type MessageRequest struct {
 	Msg Message
 }
 
-type Reciever struct { // (yes, the assignment’s original misspelling)
+type Reciever struct {
 	mu    sync.Mutex
 	Inbox map[int][]Message // dest‑ID → queue
 }
@@ -117,8 +111,6 @@ func (r *Reciever) GetMessages(id int, out *[]Message) error {
 	r.mu.Unlock()
 	return nil
 }
-
-/* ---------------- helper to merge membership tables -------------- */
 
 func CombineTables(a, b *Membership) *Membership {
 	out := NewMembership()

@@ -19,7 +19,7 @@ func init() {
 }
 
 const (
-	NewLeaderGrace = 2 * shared.HearbeatInterval
+	NewLeaderGrace = 2 * shared.MinElectonWait
 )
 
 var (
@@ -78,6 +78,7 @@ func scheduleHeartbeat() {
 func scheduleElection() {
 	delay := shared.MinElectonWait + time.Duration(rand.Intn(int(shared.MaxElectonWait-shared.MinElectonWait)))
 	time.AfterFunc(delay, func() {
+		// fmt.Printf("Node %d: election timeout (term %d) time since last HB: %v\n", selfID, term, time.Since(lastHB))
 		if state == shared.LEADER || time.Since(lastHB) < NewLeaderGrace {
 			scheduleElection()
 			return
@@ -97,7 +98,7 @@ func startElection() {
 	votesMu.Lock()
 	votes = 1 // vote for self
 	votesMu.Unlock()
-	fmt.Printf("Node %d → Candidate (term %d)\n", selfID, term)
+	fmt.Printf("Node %d Candidate (term %d)\n", selfID, term)
 
 	req := shared.VoteRequest{Term: term, CandidateID: selfID}
 	msg := shared.Message{Type: 0, Msg: req}
@@ -121,10 +122,10 @@ func countVotes() {
 	}
 	if v > shared.MaxNodes/2 {
 		state = shared.LEADER
-		fmt.Printf("Node %d → Leader (term %d)\n", selfID, term)
+		fmt.Printf("Node %d Leader (term %d)\n", selfID, term)
 	} else {
 		state = shared.FOLLOWER
-		fmt.Printf("Node %d → Follower (term %d)\n", selfID, term)
+		fmt.Printf("Node %d Follower (term %d)\n", selfID, term)
 	}
 }
 
@@ -141,7 +142,7 @@ func pullAndProcess() {
 			term = hb.Term
 			if state != shared.FOLLOWER {
 				state = shared.FOLLOWER
-				fmt.Printf("Node %d → Follower (term %d)\n", selfID, term)
+				fmt.Printf("Node %d Follower (term %d)\n", selfID, term)
 			}
 			votedFor = -1
 			membership = shared.CombineTables(membership, hb.Table)
@@ -162,26 +163,24 @@ func pullAndProcess() {
 
 func handleVoteRequest(req shared.VoteRequest) {
 	grant := false
-	if req.Term < term {
-		grant = false
-	} else {
-		if req.Term > term {
-			term = req.Term
-			state = shared.FOLLOWER
-			votedFor = -1
-		}
-		if votedFor == -1 {
-			grant = true
-			votedFor = req.CandidateID
-			lastHB = time.Now()
-		}
+	if req.Term > term {
+		// Update to the higher term and reset state
+		term = req.Term
+		state = shared.FOLLOWER
+		votedFor = -1
+	}
+	if req.Term == term && votedFor == -1 {
+		// Grant vote if not already voted in this term
+		grant = true
+		votedFor = req.CandidateID
+		lastHB = time.Now()
 	}
 	if grant {
-		// switch to follower
-		state = shared.FOLLOWER
-		fmt.Printf("Node %d → Follower (term %d)\n", selfID, term)
+		// Log the vote and switch to FOLLOWER
+		fmt.Printf("Node %d Follower (term %d)\n", selfID, term)
 		fmt.Printf("Node %d: voted for %d (term %d)\n", selfID, req.CandidateID, term)
 	}
+	// Send the vote response
 	resp := shared.VoteResponse{Term: term, VoteGranted: grant}
 	send(req.CandidateID, shared.Message{Type: 1, Msg: resp})
 }

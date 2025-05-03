@@ -1,16 +1,3 @@
-// ---------- harness.go ----------
-// Console-visualiser harness: builds client, launches broker + 8 clients,
-// parses stdout, and paints a live ANSI dashboard refreshed at 10 Hz.
-//
-//	╔════════════════════════════════════════════╗
-//	║ Node 1  term: 1   █ (Leader – green)       ║
-//	║ Node 2  term: 1   ░ (Follower – blue)      ║
-//	║ …                                          ║
-//	╚════════════════════════════════════════════╝
-//
-// Compile + run:
-//
-//	go run harness.go
 package main
 
 import (
@@ -28,19 +15,33 @@ import (
 )
 
 var (
-	colour = map[string]string{"Follower": "34", "Candidate": "33", "Leader": "32"} // ANSI
-	glyph  = map[string]string{"Follower": "░", "Candidate": "▒", "Leader": "█"}
+	// ANSI colour codes
+	color = map[string]string{
+		"Follower":  "34",
+		"Candidate": "33",
+		"Leader":    "32",
+		"Dead":      "31",
+	}
+	// Glyphs
+	glyph = map[string]string{
+		"Follower":  "░",
+		"Candidate": "▒",
+		"Leader":    "█",
+		"Dead":      "X",
+	}
 
 	// now includes Follower, Candidate, and Leader
 	reState = regexp.MustCompile(
-		`Node (\d+) → Follower .*term (\d+)|` +
-			`Node (\d+) → Candidate .*term (\d+)|` +
-			`Node (\d+) → Leader .*term (\d+)`,
+		`Node (\d+) Follower .*term (\d+)|` +
+			`Node (\d+) Candidate .*term (\d+)|` +
+			`Node (\d+) Leader .*term (\d+)`,
 	)
 
-	mu   sync.Mutex
-	term = [9]int{}    // 1–8
-	role = [9]string{} // "Follower","Candidate","Leader"
+	mu       sync.Mutex
+	term     = [9]int{}            // 1–8
+	role     = [9]string{}         // "Follower","Candidate","Leader"
+	procs    = map[int]*exec.Cmd{} // 1–8
+	killedID int
 )
 
 func main() {
@@ -54,8 +55,38 @@ func main() {
 		// randomly wait between 0 and 400 ms before starting each client
 		time.Sleep(time.Duration(rand.Intn(400)) * time.Millisecond)
 		role[i] = "Follower"
-		spawn(fmt.Sprintf("C%d", i), "./client_bin", fmt.Sprint(i))
+		cmd := spawn(fmt.Sprintf("C%d", i), "./client_bin", fmt.Sprint(i))
+		procs[i] = cmd
 	}
+	const killInterval = 15 * time.Second
+	go func() {
+		for {
+			time.Sleep(killInterval)
+
+			mu.Lock()
+			leaderID := 0
+			for i := 1; i <= 8; i++ {
+				if role[i] == "Leader" {
+					leaderID = i
+					break
+				}
+			}
+			// Mark dead and kill process
+			if leaderID != 0 {
+				role[leaderID] = "Dead"
+				fmt.Printf("\nKilling leader C%d at t=%v\n", leaderID, time.Now().Format("15:04:05"))
+				if cmd, ok := procs[leaderID]; ok {
+					cmd.Process.Kill()
+					delete(procs, leaderID)
+				}
+				mu.Unlock()
+			} else {
+				mu.Unlock()
+				fmt.Println("\nNo leader found — at least half of nodes dead, or failed to re-elect. Exiting.")
+				os.Exit(0)
+			}
+		}
+	}()
 
 	go dashboard()
 	select {}
@@ -111,13 +142,18 @@ func dashboard() {
 		time.Sleep(100 * time.Millisecond)
 		mu.Lock()
 		var buf bytes.Buffer
-		buf.WriteString("\033[2J\033[HRaft cluster live view (10 Hz)\n")
+		// Clear & move cursor to top
+		buf.WriteString("\033[2J\033[HRaft cluster live view\n")
 		for i := 1; i <= 8; i++ {
-			clr := colour[role[i]]
+			clr := color[role[i]]
+			g := glyph[role[i]]
 			buf.WriteString(fmt.Sprintf(
 				"Node %d  term:%2d  \033[1;%sm%s\033[0m\n",
-				i, term[i], clr, glyph[role[i]],
+				i, term[i], clr, g,
 			))
+		}
+		if killedID != 0 {
+			buf.WriteString(fmt.Sprintf("Killed node: %d (marked X)\n", killedID))
 		}
 		os.Stdout.Write(buf.Bytes())
 		mu.Unlock()
